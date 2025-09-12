@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/italianno": "^5.2.7",
     "astro": "^5.13.7",
     "sass": "^1.92.1"
   },
