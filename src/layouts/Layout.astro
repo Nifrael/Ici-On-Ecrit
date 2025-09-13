@@ -1,6 +1,7 @@
 ---
 import "../styles/main.scss";
 import Navbar from "../components/global/Navbar.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -11,11 +12,17 @@ import Navbar from "../components/global/Navbar.astro";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
+
+    <ClientRouter />
   </head>
   <body>
     <Navbar />
     <main>
       <slot />
     </main>
+
+    <script>
+      import "/src/scripts/keyboardDetection.js";
+    </script>
   </body>
 </html>
