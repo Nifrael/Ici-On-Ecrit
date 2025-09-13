@@ -1,0 +1,119 @@
+---
+import { Image } from "astro:assets";
+import MachineAEcrire from "../../assets/Images/accueil.jpg";
+---
+
+<div class="grid-accueil">
+  <div class="animated-text">
+    <h1 id="title">ICI, ON ECRIT.</h1>
+    <h2 class="typewriter"></h2>
+  </div>
+  <Image
+    src={MachineAEcrire}
+    alt="Image d'une machine à écrire noire."
+    width={600}
+    height={600}
+  />
+</div>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixins" as *;
+
+  .grid-accueil {
+    display: grid;
+    max-height: 80vh;
+    grid-template-rows: repeat(2, auto);
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+    img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 40px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .animated-text {
+    height: auto;
+    max-width: 70%;
+    margin: 3rem auto 0 auto;
+  }
+
+  #title {
+    text-align: center;
+  }
+
+  .typewriter {
+    text-align: center;
+    font-family: var(--font-title);
+    color: var(--primary-color);
+    min-height: 5em;
+  }
+
+  @include breakpoint-up($breakpoint-tablet) {
+    .grid-accueil {
+      img {
+        width: 400px;
+        height: 400px;
+      }
+    }
+  }
+
+  @include breakpoint-up($breakpoint-desktop) {
+    .grid-accueil {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin: 3rem auto;
+      padding: 1rem;
+      img {
+        width: 500px;
+        height: 500px;
+      }
+    }
+  }
+
+  @include breakpoint-up($breakpoint-desktop-xl) {
+    .grid-accueil {
+      margin: 6rem auto;
+      img {
+        width: 600px;
+        height: 600px;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  import { TextPlugin } from "gsap/TextPlugin";
+
+  gsap.registerPlugin(TextPlugin);
+
+  const phrases = [
+    "Sur tout.",
+    "Sur rien.",
+    "Mais surtout sur ce qui nous anime.",
+  ];
+
+  const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+  phrases.forEach((phrase) => {
+    tl.to(".typewriter", {
+      duration: phrase.length * 0.05,
+      opacity: 1,
+      text: phrase,
+      ease: "power1.Out",
+    })
+      .to(".typewriter", {
+        duration: 0.7,
+        opacity: 0,
+        ease: "power1.Out",
+        delay: 1,
+      })
+      .to(".typewriter", { duration: 1, text: "|", ease: "power1.Out" });
+  });
+</script>
