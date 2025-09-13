@@ -5,4 +5,27 @@ import TitleSection from "@components/index/TitleSection.astro";
 
 <Layout>
   <TitleSection />
+  <div class="test">
+    <cite
+      >"Chaque début d’écriture est un retour à la case départ. Et la case
+      départ, c’est un endroit où l’on se sent très seul. Un endroit où aucun de
+      vos accomplissements passés ne compte.</cite
+    >
+  </div>
 </Layout>
+
+<style lang="scss">
+  .test {
+    background: url("/src/assets/background.svg");
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    cite {
+      width: 80%;
+      color: var(--secondary-color);
+      font-size: var(--h3);
+      text-align: center;
+    }
+  }
+</style>
