@@ -3,6 +3,8 @@ let isOpen = false;
 function init() {
   const btn = document.querySelector(".menu-button");
   const menu = document.querySelector(".menu");
+  const body = document.body;
+  const html = document.documentElement;
 
   if (!btn || !menu) return;
 
@@ -10,6 +12,8 @@ function init() {
     isOpen = true;
     btn.classList.add("active");
     menu.classList.add("show");
+    body.classList.add("no-scroll");
+    html.classList.add("no-scroll");
     btn.setAttribute("aria-expanded", "true");
     btn.setAttribute("aria-label", "Fermer le menu");
     menu.setAttribute("aria-hidden", "false");
@@ -24,6 +28,8 @@ function init() {
     isOpen = false;
     btn.classList.remove("active");
     menu.classList.remove("show");
+    body.classList.remove("no-scroll");
+    html.classList.remove("no-scroll");
     btn.setAttribute("aria-expanded", "false");
     btn.setAttribute("aria-label", "Ouvrir le menu");
     menu.setAttribute("aria-hidden", "true");
