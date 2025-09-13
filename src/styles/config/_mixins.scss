@@ -1,5 +1,7 @@
 @use "variables" as *;
 
+// MIXINS RESPONSIVE ET LAYOUT
+
 @mixin breakpoint-down($size) {
   @media (width <= $size) {
     @content;
@@ -12,27 +14,28 @@
   }
 }
 
-// Mixins pour l'accessibilité - Focus visible uniquement au clavier
-@mixin keyboard-focus($color: var(--primary-color), $offset: 2px, $radius: 2px) {
+// MIXINS D'ACCESSIBILITÉ
+
+@mixin keyboard-focus($color: var(--primary-color), $offset: 2px) {
   &:focus {
     outline: none;
   }
-  
+
   &:focus-visible {
     outline: 2px solid $color;
     outline-offset: $offset;
-    border-radius: $radius;
   }
-  
-  /* Fallback pour les navigateurs qui ne supportent pas :focus-visible */
+
   .keyboard-navigation &:focus {
     outline: 2px solid $color;
     outline-offset: $offset;
-    border-radius: $radius;
+  }
+
+  .mouse-navigation &:focus {
+    outline: none;
   }
 }
 
-// Mixin spécialisé pour les boutons
-@mixin button-keyboard-focus($color: var(--primary-color), $offset: 2px) {
-  @include keyboard-focus($color, $offset, 0);
+@mixin button-keyboard-focus($color: var(--primary-color)) {
+  @include keyboard-focus($color, 3px);
 }
