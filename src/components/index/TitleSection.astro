@@ -103,27 +103,40 @@ import MachineAEcrire from "../../assets/Images/accueil.jpg";
 
   gsap.registerPlugin(TextPlugin);
 
-  const phrases = [
-    "Sur tout.",
-    "Sur rien.",
-    "Mais surtout sur ce qui nous anime.",
-  ];
+  let tl: any;
 
-  const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+  function runAnimation() {
+    const phrases = [
+      "Sur tout.",
+      "Sur rien.",
+      "Mais surtout sur ce qui nous anime.",
+    ];
 
-  phrases.forEach((phrase) => {
-    tl.to(".typewriter", {
-      duration: phrase.length * 0.05,
-      opacity: 1,
-      text: phrase,
-      ease: "power1.Out",
-    })
-      .to(".typewriter", {
-        duration: 0.7,
-        opacity: 0,
+    tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+    phrases.forEach((phrase) => {
+      tl.to(".typewriter", {
+        duration: phrase.length * 0.05,
+        opacity: 1,
+        text: phrase,
         ease: "power1.Out",
-        delay: 1,
+        delay: 0.8,
       })
-      .to(".typewriter", { duration: 1, text: "|", ease: "power1.Out" });
-  });
+        .to(".typewriter", {
+          duration: 0.7,
+          opacity: 0,
+          ease: "power1.Out",
+          delay: 1,
+        })
+        .to(".typewriter", { duration: 1, text: "|", ease: "power1.Out" });
+    });
+  }
+  function cleanupAnimation() {
+    if (tl) {
+      tl.kill();
+    }
+  }
+
+  document.addEventListener("astro:page-load", runAnimation);
+  document.addEventListener("astro:before-preparation", cleanupAnimation);
 </script>
