@@ -47,8 +47,8 @@ const menuItems = [
 </header>
 
 <style lang="scss">
-  @use "../../styles/config/variables" as *;
-  @use "../../styles/config/mixins" as *;
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixins" as *;
 
   header {
     width: 100%;
@@ -192,7 +192,12 @@ const menuItems = [
     overflow-y: auto;
   }
 
-  @include breakpoint-up($breakpoint-tablet) {
+  :global(body.no-scroll),
+  :global(html.no-scroll) {
+    overflow: hidden;
+  }
+
+  @include breakpoint-up($breakpoint-desktop) {
     header {
       z-index: 100;
     }
