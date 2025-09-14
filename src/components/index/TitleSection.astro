@@ -22,15 +22,15 @@ import MachineAEcrire from "../../assets/Images/accueil.jpg";
 
   .grid-accueil {
     display: grid;
-    max-height: 80vh;
+    width: 100%;
+    min-height: 90vh;
     grid-template-rows: repeat(2, auto);
-    align-items: center;
+    align-items: start;
     justify-items: center;
     margin-bottom: 5rem;
-    gap: 1rem;
     img {
-      width: 300px;
-      height: 300px;
+      width: 70%;
+      height: 70%;
       object-fit: cover;
       border-radius: 40px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -52,45 +52,20 @@ import MachineAEcrire from "../../assets/Images/accueil.jpg";
     font-family: var(--font-title);
     color: var(--primary-color);
     min-height: 5em;
-  }
-
-  @include breakpoint-up($breakpoint-tablet) {
-    .grid-accueil {
-      img {
-        width: 400px;
-        height: 400px;
-      }
-    }
+    margin-bottom: 0;
   }
 
   @include breakpoint-up($breakpoint-desktop) {
     .grid-accueil {
+      width: 95%;
       grid-template-columns: repeat(2, 1fr);
+      align-content: center;
+      align-items: center;
       gap: 2rem;
-      margin: 3rem auto 3rem auto;
+      margin: 0 auto 2rem auto;
       padding: 1rem;
       img {
-        width: 450px;
-        height: 450px;
-      }
-    }
-  }
-
-  @include breakpoint-up($breakpoint-desktop-xl) {
-    .grid-accueil {
-      margin: 2.5rem auto 5rem auto;
-      img {
-        width: 500px;
-        height: 500px;
-      }
-    }
-  }
-
-  @include breakpoint-up($breakpoint-desktop-xxl) {
-    .grid-accueil {
-      img {
-        width: 600px;
-        height: 600px;
+        width: 70%;
       }
     }
   }
