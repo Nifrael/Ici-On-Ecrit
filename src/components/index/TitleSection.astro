@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+import MachineAEcrire from "../../assets/Images/accueil.jpg";
+---
+
+<div class="grid-accueil">
+  <div class="animated-text">
+    <h1 id="title">ICI, ON ECRIT.</h1>
+    <h2 class="typewriter"></h2>
+  </div>
+  <Image
+    src={MachineAEcrire}
+    alt="Image d'une machine à écrire noire."
+    width={600}
+    height={600}
+  />
+</div>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixins" as *;
+
+  .grid-accueil {
+    display: grid;
+    width: 100%;
+    min-height: 90vh;
+    grid-template-rows: repeat(2, auto);
+    align-items: start;
+    justify-items: center;
+    margin-bottom: 5rem;
+    img {
+      width: 70%;
+      height: 70%;
+      object-fit: cover;
+      border-radius: 40px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .animated-text {
+    height: auto;
+    max-width: 70%;
+    margin: 3rem auto 0 auto;
+  }
+
+  #title {
+    text-align: center;
+  }
+
+  .typewriter {
+    text-align: center;
+    font-family: var(--font-title);
+    color: var(--primary-color);
+    min-height: 5em;
+    margin-bottom: 0;
+  }
+
+  @include breakpoint-up($breakpoint-desktop) {
+    .grid-accueil {
+      width: 95%;
+      grid-template-columns: repeat(2, 1fr);
+      align-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin: 0 auto 2rem auto;
+      padding: 1rem;
+      img {
+        width: 70%;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  import { TextPlugin } from "gsap/TextPlugin";
+
+  gsap.registerPlugin(TextPlugin);
+
+  let tl: any;
+
+  function runAnimation() {
+    const phrases = [
+      "Sur tout.",
+      "Sur rien.",
+      "Mais surtout sur ce qui nous anime.",
+    ];
+
+    tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+
+    phrases.forEach((phrase) => {
+      tl.to(".typewriter", {
+        duration: phrase.length * 0.05,
+        opacity: 1,
+        text: phrase,
+        ease: "power1.Out",
+        delay: 0.8,
+      })
+        .to(".typewriter", {
+          duration: 0.7,
+          opacity: 0,
+          ease: "power1.Out",
+          delay: 1,
+        })
+        .to(".typewriter", { duration: 1, text: "|", ease: "power1.Out" });
+    });
+  }
+  function cleanupAnimation() {
+    if (tl) {
+      tl.kill();
+    }
+  }
+
+  document.addEventListener("astro:page-load", runAnimation);
+  document.addEventListener("astro:before-preparation", cleanupAnimation);
+</script>
