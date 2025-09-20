@@ -24,27 +24,27 @@ import Livre from "@images/mosaïque/Livres.jpg";
 const categories = [
   {
     name: "Société",
-    slug: "societe",
+    slug: "/categories/societe",
     images: [People, Society, Union],
   },
   {
     name: "Jeux Vidéo",
-    slug: "jeux-video",
+    slug: "/categories/jeux-video",
     images: [Playstation, Nintendo, Xbox],
   },
   {
     name: "Actualités",
-    slug: "actualites",
+    slug: "/categories/actualites",
     images: [Actualités, Journaux, Opinion],
   },
   {
     name: "Sport",
-    slug: "sport",
+    slug: "/categories/sport",
     images: [Liverpool, Football, Terrain],
   },
   {
     name: "Culture",
-    slug: "culture",
+    slug: "/categories/culture",
     images: [Musique, Cinema, Livre],
   },
 ];
@@ -55,15 +55,12 @@ const categories = [
     <div class="mozaique-grid">
       {
         categories.map((category, index) => (
-          <a
-            href={`/categories/${category.slug}`}
-            class={`category-tile tile-${index + 1}`}
-          >
+          <a href={category.slug} class="category-tile">
             <div class="images-carousel">
-              {category.images.map((image, imgIndex) => (
+              {category.images.map((image) => (
                 <Image
                   src={image}
-                  alt={`${category.name} ${imgIndex + 1}`}
+                  alt={category.name}
                   class="carousel-image"
                   width={600}
                   height={400}
@@ -86,12 +83,15 @@ const categories = [
 <style lang="scss">
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixins" as *;
+  @use "sass:list" as list;
 
   .categories-mozaique {
     padding: 2rem 0;
   }
 
   .mozaique-grid {
+    width: 90%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 160px);
@@ -103,17 +103,6 @@ const categories = [
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
-    cursor: pointer;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    }
   }
 
   .images-carousel {
@@ -153,15 +142,12 @@ const categories = [
       opacity: 0;
     }
     8% {
-      /* Temps de fondu en entrée */
       opacity: 1;
     }
     33% {
-      /* Maintien de l'image visible */
       opacity: 1;
     }
     41% {
-      /* Fondu en sortie */
       opacity: 0;
     }
     100% {
@@ -191,23 +177,21 @@ const categories = [
     }
   }
 
-  // --- Logique de couleurs par position ---
-  // Modifiez cette liste pour changer les couleurs ou en ajouter
   $tile-colors: (
     rgba(138, 92, 246, 0.4),
-    // 1. Violet (pour tile-1)
     rgba(239, 68, 68, 0.4),
-    // 2. Rouge (pour tile-2)
     rgba(6, 182, 212, 0.4),
-    // 3. Cyan (pour tile-3)
     rgba(16, 185, 129, 0.4),
-    // 4. Vert (pour tile-4)
-    rgba(245, 158, 11, 0.4) // 5. Orange (pour tile-5)
+    rgba(245, 158, 11, 0.4)
   );
 
-  @for $i from 1 through length($tile-colors) {
-    .tile-#{$i} .category-overlay {
-      background: linear-gradient(to top, nth($tile-colors, $i), transparent);
+  @for $i from 1 through list.length($tile-colors) {
+    .category-tile:nth-child(#{$i}) .category-overlay {
+      background: linear-gradient(
+        to top,
+        list.nth($tile-colors, $i),
+        transparent
+      );
     }
   }
 
@@ -252,38 +236,49 @@ const categories = [
 
   @include breakpoint-up($breakpoint-tablet) {
     .mozaique-grid {
+      width: 90%;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(3, 200px);
-      height: 620px;
+      grid-template-rows: repeat(3, 180px);
+      height: auto;
     }
 
-    .tile-1 {
+    .category-tile {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .category-tile:nth-child(1) {
       grid-area: 1 / 1 / 3 / 3;
     }
-    .tile-2 {
+    .category-tile:nth-child(2) {
       grid-area: 1 / 3 / 2 / 4;
     }
-    .tile-3 {
+    .category-tile:nth-child(3) {
       grid-area: 1 / 4 / 2 / 5;
     }
-    .tile-4 {
+    .category-tile:nth-child(4) {
       grid-area: 2 / 3 / 4 / 5;
     }
-    .tile-5 {
+    .category-tile:nth-child(5) {
       grid-area: 3 / 1 / 4 / 3;
     }
   }
 </style>
 
 <script>
-  // Ce script s'exécute au chargement initial de la page et après chaque
-  // navigation via View Transitions grâce à l'événement `astro:page-load`.
   document.addEventListener("astro:page-load", () => {
     const tiles = document.querySelectorAll(".category-tile");
-
-    // L'observer est recréé à chaque chargement de page où ce composant est présent.
-    // Les anciens observers sont automatiquement nettoyés par le navigateur
-    // lorsque leurs éléments cibles sont retirés du DOM lors du swap de page.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
