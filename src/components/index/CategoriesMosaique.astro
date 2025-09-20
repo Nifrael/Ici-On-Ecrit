@@ -1,0 +1,293 @@
+---
+import { Image } from "astro:assets";
+
+import Playstation from "@images/mosaïque/Playstation.jpg";
+import Nintendo from "@images/mosaïque/Nintendo.jpg";
+import Xbox from "@images/mosaïque/Xbox.jpg";
+
+import People from "@images/mosaïque/People.jpg";
+import Society from "@images/mosaïque/Society.jpg";
+import Union from "@images/mosaïque/Union.jpg";
+
+import Opinion from "@images/mosaïque/Opinion.jpg";
+import Actualités from "@images/mosaïque/Actualités.jpg";
+import Journaux from "@images/mosaïque/Journaux.jpg";
+
+import Liverpool from "@images/mosaïque/Liverpool.jpg";
+import Football from "@images/mosaïque/Football.jpg";
+import Terrain from "@images/mosaïque/Terrain.jpg";
+
+import Musique from "@images/mosaïque/Musique.jpg";
+import Cinema from "@images/mosaïque/Cinema.jpg";
+import Livre from "@images/mosaïque/Livres.jpg";
+
+const categories = [
+  {
+    name: "Société",
+    slug: "/categories/societe",
+    images: [People, Society, Union],
+  },
+  {
+    name: "Jeux Vidéo",
+    slug: "/categories/jeux-video",
+    images: [Playstation, Nintendo, Xbox],
+  },
+  {
+    name: "Actualités",
+    slug: "/categories/actualites",
+    images: [Actualités, Journaux, Opinion],
+  },
+  {
+    name: "Sport",
+    slug: "/categories/sport",
+    images: [Liverpool, Football, Terrain],
+  },
+  {
+    name: "Culture",
+    slug: "/categories/culture",
+    images: [Musique, Cinema, Livre],
+  },
+];
+---
+
+<section class="categories-mozaique">
+  <div class="container">
+    <div class="mozaique-grid">
+      {
+        categories.map((category, index) => (
+          <a href={category.slug} class="category-tile">
+            <div class="images-carousel">
+              {category.images.map((image) => (
+                <Image
+                  src={image}
+                  alt={category.name}
+                  class="carousel-image"
+                  width={600}
+                  height={400}
+                  format="webp"
+                  quality={80}
+                />
+              ))}
+            </div>
+            <div class="category-overlay">
+              <h3>{category.name}</h3>
+              <span class="arrow">→</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixins" as *;
+  @use "sass:list" as list;
+
+  .categories-mozaique {
+    padding: 2rem 0;
+  }
+
+  .mozaique-grid {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 160px);
+    gap: 1rem;
+    height: auto;
+  }
+
+  .category-tile {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .images-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: imageFade 9s infinite;
+    animation-play-state: paused;
+
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 3s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 6s;
+    }
+  }
+
+  @keyframes imageFade {
+    0% {
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    33% {
+      opacity: 1;
+    }
+    41% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    transition: background 0.3s ease;
+
+    h3 {
+      color: white;
+      margin: 0;
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+  }
+
+  $tile-colors: (
+    rgba(138, 92, 246, 0.4),
+    rgba(239, 68, 68, 0.4),
+    rgba(6, 182, 212, 0.4),
+    rgba(16, 185, 129, 0.4),
+    rgba(245, 158, 11, 0.4)
+  );
+
+  @for $i from 1 through list.length($tile-colors) {
+    .category-tile:nth-child(#{$i}) .category-overlay {
+      background: linear-gradient(
+        to top,
+        list.nth($tile-colors, $i),
+        transparent
+      );
+    }
+  }
+
+  .category-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .category-tile:hover {
+    .category-overlay::after {
+      opacity: 1;
+    }
+    h3 {
+      transform: translateY(-4px);
+    }
+    .arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .arrow {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  .category-tile.animate .carousel-image {
+    animation-play-state: running;
+  }
+
+  @include breakpoint-up($breakpoint-tablet) {
+    .mozaique-grid {
+      width: 90%;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 180px);
+      height: auto;
+    }
+
+    .category-tile {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .category-tile:nth-child(1) {
+      grid-area: 1 / 1 / 3 / 3;
+    }
+    .category-tile:nth-child(2) {
+      grid-area: 1 / 3 / 2 / 4;
+    }
+    .category-tile:nth-child(3) {
+      grid-area: 1 / 4 / 2 / 5;
+    }
+    .category-tile:nth-child(4) {
+      grid-area: 2 / 3 / 4 / 5;
+    }
+    .category-tile:nth-child(5) {
+      grid-area: 3 / 1 / 4 / 3;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const tiles = document.querySelectorAll(".category-tile");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("animate", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    tiles.forEach((tile) => observer.observe(tile));
+  });
+</script>
