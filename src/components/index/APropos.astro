@@ -2,81 +2,58 @@
 import { Image } from "astro:assets";
 
 import Julien from "@images/Julien.jpg";
-// import auteur1 from "@images/auteur1.jpg";
-// import auteur2 from "@images/auteur2.jpg";
+
+const authors = [
+  {
+    name: "Julien",
+    role: "Rédacteur",
+    image: Julien,
+  },
+  {
+    name: "À venir",
+    role: "Contributeur",
+    image: null,
+  },
+];
 ---
 
 <section class="a-propos">
   <div class="container">
     <div class="content">
-      <!-- Image de profil principale -->
-      <div class="profile-image">
-        <div class="placeholder-image">
-          <span>📝</span>
-        </div>
-        <!-- <Image
-          src={Julien}
-          alt=""
-          class="profile-img"
-          width={150}
-          height={150}
-          format="webp"
-          quality={90}
-        /> -->
-      </div>
-
-      <!-- Titre principal -->
-      <h1>Bienvenue sur Ici On Écrit</h1>
-
-      <!-- Paragraphe de présentation -->
+      <h1>Ici, On Écrit</h1>
       <p class="description">
         Une plateforme dédiée à la passion de l'écriture et du partage d'idées.
         Ici, nous explorons ensemble différents univers à travers des articles
         authentiques et des réflexions personnelles sur les sujets qui nous
         animent.
       </p>
-
-      <!-- Sous-titre -->
-      <h2>L'équipe</h2>
-
-      <!-- Photos des contributeurs -->
+      <h2>Ici, Qui Écrit ?</h2>
       <div class="authors-grid">
-        <div class="author">
-          <div class="author-image">
-            <Image
-              src={Julien}
-              alt=""
-              class="author-img"
-              width={80}
-              height={80}
-              format="webp"
-              quality={90}
-            />
-          </div>
-          <h3>Nom de l'auteur</h3>
-          <p>Rôle ou spécialité</p>
-        </div>
-
-        <div class="author">
-          <div class="author-image">
-            <div class="placeholder-image small">
-              <span>👤</span>
+        {
+          authors.map((author) => (
+            <div class="author">
+              <div class="author-image">
+                {author.image ? (
+                  <Image
+                    src={author.image}
+                    alt={author.name}
+                    class="author-img"
+                    width={80}
+                    height={80}
+                    format="webp"
+                    quality={90}
+                  />
+                ) : (
+                  <div class="placeholder-image small">
+                    <span>👤</span>
+                  </div>
+                )}
+              </div>
+              <h3>{author.name}</h3>
+              <p>{author.role}</p>
             </div>
-            <!-- Remplacer par :
-            <Image
-              src={auteur2}
-              alt="Auteur 2"
-              class="author-img"
-              width={80}
-              height={80}
-              format="webp"
-              quality={90}
-            />
-            -->
-          </div>
-          <h3>Nom de l'auteur</h3>
-          <p>Rôle ou spécialité</p>
-        </div>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -87,7 +64,6 @@ import Julien from "@images/Julien.jpg";
   @use "@styles/config/mixins" as *;
 
   .a-propos {
-    padding: 4rem 0;
     min-height: 80vh;
     display: flex;
     align-items: center;
@@ -99,12 +75,6 @@ import Julien from "@images/Julien.jpg";
     border-radius: 2rem;
     padding: 3rem 2rem;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-  }
-
-  .profile-image {
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
   }
 
   .placeholder-image {
@@ -139,28 +109,14 @@ import Julien from "@images/Julien.jpg";
   }
 
   h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #1a202c;
-    font-weight: 700;
     line-height: 1.2;
   }
 
   .description {
-    font-size: 1.125rem;
     line-height: 1.7;
-    color: #4a5568;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #2d3748;
-    font-weight: 600;
+    max-width: 90%;
+    text-align: justify;
+    margin: 2rem auto;
   }
 
   .authors-grid {
@@ -192,48 +148,28 @@ import Julien from "@images/Julien.jpg";
   }
 
   .author h3 {
-    font-size: 1.25rem;
+    margin-top: 0;
     margin-bottom: 0.5rem;
-    color: #2d3748;
     font-weight: 600;
   }
 
   .author p {
-    color: #718096;
     font-size: 0.9rem;
     margin: 0;
   }
 
   @include breakpoint-up($breakpoint-tablet) {
     .content {
-      padding: 4rem 3rem;
-    }
-
-    h1 {
-      font-size: 3rem;
-    }
-
-    .description {
-      font-size: 1.25rem;
+      padding: 3rem 3rem;
+      h2 {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+      }
     }
 
     .authors-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, auto);
       gap: 3rem;
-    }
-  }
-
-  @include breakpoint-up($breakpoint-desktop) {
-    .a-propos {
-      padding: 6rem 0;
-    }
-
-    .content {
-      padding: 5rem 4rem;
-    }
-
-    .authors-grid {
-      gap: 4rem;
     }
   }
 </style>
