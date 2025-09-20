@@ -1,30 +1,17 @@
----
-import { Image } from "astro:assets";
-import Bibliothèque from "../../assets/Images/bibliotheque.jpg";
----
-
 <section class="citation-card">
-  <div class="parallax-bg">
-    <Image
-      src={Bibliothèque}
-      alt="Image d'une bibliothèque avec des livres colorés."
-      width={2000}
-      height={2000}
-    />
+  <div class="text-section">
+    <p class="quote">
+      « Les mots sont, à mon avis qui n'est pas si humble, notre plus
+      inépuisable source de magie. Ils peuvent à la fois infliger des blessures
+      et y porter remède. »
+    </p>
+    <p class="author">Albus Dumbledore</p>
   </div>
   <div class="text-section">
     <p class="quote">
-      "Un livre est un jardin que l'on peut mettre dans sa poche."
+      « La difficulté n'est pas d'écrire, mais d'écrire ce que l'on pense. »
     </p>
-    <p class="author">Proverbe arabe</p>
-  </div>
-  <div class="text-section">
-    <p class="quote">
-      « Bien sûr, un livre peut te changer ! Et même changer ta vie. Comme un
-      coup de foudre. Et on ne peut pas savoir quand la rencontre aura lieu. Il
-      faut se méfier des livres. Ce sont des génies endormis. »
-    </p>
-    <p class="author">Gaël Faye</p>
+    <p class="author">Stendhal</p>
   </div>
 </section>
 
@@ -34,84 +21,44 @@ import Bibliothèque from "../../assets/Images/bibliotheque.jpg";
 
   .citation-card {
     width: 100%;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
+    min-height: 80vh;
+    background: url("../../assets/Images/whiteboard.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.1);
     display: flex;
+    gap: 2rem;
+    padding: 4rem 0;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    .parallax-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-    .parallax-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      position: absolute;
-    }
+    justify-content: space-around;
   }
+
   .text-section {
     width: 75%;
-    max-height: 50vh;
-    position: absolute;
-    left: 10%;
-    top: 10%;
     border-radius: 20px;
-    z-index: 1;
     text-align: center;
     padding: 2rem;
     background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px);
-    box-sizing: border-box;
-  }
-  .text-section:nth-child(3) {
-    top: 47%;
   }
 
   @include breakpoint-up($breakpoint-tablet) {
-    .text-section {
-      width: 35%;
-      left: 15%;
-      max-height: 60vh;
+    .citation-card {
+      min-height: 70vh;
+      background-attachment: fixed;
     }
-    .text-section:nth-child(3) {
-      top: 55%;
-      left: 55%;
+
+    .text-section {
+      width: 70%;
+    }
+  }
+
+  @include breakpoint-up($breakpoint-desktop) {
+    .text-section {
+      width: 50%;
     }
   }
 </style>
-
-<script>
-  function handleParallax() {
-    const container = document.querySelector(".citation-card") as HTMLElement;
-    const parallaxImage = document.querySelector(
-      ".parallax-bg img",
-    ) as HTMLElement;
-
-    if (!container || !parallaxImage) return;
-
-    const containerTop = container.offsetTop;
-    const containerHeight = container.offsetHeight;
-    const windowHeight = window.innerHeight;
-    const scrollPosition = window.scrollY;
-
-    if (
-      scrollPosition + windowHeight > containerTop &&
-      scrollPosition < containerTop + containerHeight
-    ) {
-      const scrollInSection = scrollPosition - containerTop;
-      parallaxImage.style.transform = `translateY(${scrollInSection * 0.5}px)`;
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    document.addEventListener("scroll", handleParallax);
-    handleParallax();
-  });
-</script>
