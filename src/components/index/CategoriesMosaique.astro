@@ -52,6 +52,7 @@ const categories = [
 
 <section class="categories-mozaique">
   <div class="container">
+    <h1>A chaque envie, une catégorie.</h1>
     <div class="mozaique-grid">
       {
         categories.map((category, index) => (
@@ -86,7 +87,12 @@ const categories = [
   @use "sass:list" as list;
 
   .categories-mozaique {
-    padding: 2rem 0;
+    margin: 4rem 0;
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 4rem;
+    }
   }
 
   .mozaique-grid {
@@ -235,6 +241,12 @@ const categories = [
   }
 
   @include breakpoint-up($breakpoint-tablet) {
+    .categories-mozaique {
+      margin: 6rem 0;
+      h1 {
+        margin-bottom: 6rem;
+      }
+    }
     .mozaique-grid {
       width: 90%;
       grid-template-columns: repeat(4, 1fr);
