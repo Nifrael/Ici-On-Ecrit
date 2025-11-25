@@ -1,6 +1,7 @@
 ---
 import "@styles/main.scss";
 import Navbar from "@components/global/Navbar.astro";
+import Footer from "@components/global/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 ---
 
@@ -20,6 +21,7 @@ import { ClientRouter } from "astro:transitions";
     <main>
       <slot />
     </main>
+    <Footer />
 
     <script>
       import "/src/scripts/keyboardDetection.js";

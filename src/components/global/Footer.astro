@@ -1,5 +1,76 @@
 ---
-
+const currentYear = new Date().getFullYear();
 ---
 
-<footer></footer>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="/mentions-legales">Mentions légales</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-left">
+        <p>&copy; {currentYear} Ici, On Écrit. Tous droits réservés.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixins" as *;
+
+  .site-footer {
+    padding: 2rem 0;
+    margin-top: 5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+    font-family: var(--font-text);
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+
+    @include breakpoint-up($breakpoint-tablet) {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  .footer-left {
+    p {
+      margin: 0;
+      color: var(--paragraph-color);
+      font-size: 0.9rem;
+    }
+  }
+
+  .footer-nav {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--tertiary-color);
+      }
+    }
+  }
+</style>
