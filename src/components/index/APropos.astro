@@ -1,0 +1,175 @@
+---
+import { Image } from "astro:assets";
+
+import Julien from "@images/Julien.jpg";
+
+const authors = [
+  {
+    name: "Julien",
+    role: "Rédacteur",
+    image: Julien,
+  },
+  {
+    name: "À venir",
+    role: "Contributeur",
+    image: Julien,
+  },
+];
+---
+
+<section class="a-propos">
+  <div class="container">
+    <div class="content">
+      <h1>Ici, On Écrit</h1>
+      <p class="description">
+        Une plateforme dédiée à la passion de l'écriture et du partage d'idées.
+        Ici, nous explorons ensemble différents univers à travers des articles
+        authentiques et des réflexions personnelles sur les sujets qui nous
+        animent.
+      </p>
+      <h2>Ici, Qui Écrit ?</h2>
+      <div class="authors-grid">
+        {
+          authors.map((author) => (
+            <div class="author">
+              <div class="author-image">
+                {author.image ? (
+                  <Image
+                    src={author.image}
+                    alt={author.name}
+                    class="author-img"
+                    width={80}
+                    height={80}
+                    format="webp"
+                    quality={90}
+                  />
+                ) : (
+                  <div class="placeholder-image small">
+                    <span>👤</span>
+                  </div>
+                )}
+              </div>
+              <h3>{author.name}</h3>
+              <p>{author.role}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixins" as *;
+
+  .a-propos {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .content {
+    text-align: center;
+    background: var(--secondary-color);
+    border-radius: 2rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  }
+
+  .placeholder-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+
+    &.small {
+      width: 80px;
+      height: 80px;
+      font-size: 1.5rem;
+    }
+  }
+
+  .profile-img,
+  .author-img {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+    object-position: top;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  h1 {
+    line-height: 1.2;
+  }
+
+  .description {
+    line-height: 1.7;
+    max-width: 90%;
+    text-align: justify;
+    margin: 2rem auto;
+  }
+
+  .authors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .author {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: #f8fafc;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .author-image {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .author h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .author p {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  @include breakpoint-up($breakpoint-tablet) {
+    .content {
+      padding: 3rem 3rem;
+      h2 {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+      }
+    }
+
+    .authors-grid {
+      grid-template-columns: repeat(2, auto);
+      gap: 3rem;
+    }
+  }
+</style>
