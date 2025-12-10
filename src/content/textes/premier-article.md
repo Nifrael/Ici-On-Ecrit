@@ -2,7 +2,7 @@
 title: "Puisqu'il y a un début à tout."
 description: "Le besoin d'écrire, avant tout. L'envie, malgré l'appréhension. Mais l'envie, malgré tout."
 pubDate: "Dec 06 2025"
-heroImage: "../../assets/Images/Julien.jpg"
+heroImage: "../../assets/Images/articles/First.jpg"
 ---
 
 # Pourquoi ?

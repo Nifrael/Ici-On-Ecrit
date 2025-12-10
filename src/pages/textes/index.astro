@@ -74,16 +74,16 @@ const posts = (await getCollection("textes")).sort(
       height: 100%;
     }
 
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    // &:hover {
+    //   transform: translateY(-4px);
+    //   box-shadow:
+    //     0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    //     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-      .title {
-        color: var(--primary-color);
-      }
-    }
+    //   .title {
+    //     color: var(--primary-color);
+    //   }
+    // }
   }
 
   .card-image {
@@ -95,7 +95,7 @@ const posts = (await getCollection("textes")).sort(
     justify-content: center;
 
     img {
-      width: 70%;
+      width: 100%;
       height: 100%;
       margin: auto;
       object-fit: cover;
