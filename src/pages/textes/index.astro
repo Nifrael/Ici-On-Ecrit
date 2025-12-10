@@ -9,6 +9,9 @@ const posts = (await getCollection("textes")).sort(
 ---
 
 <Layout title="Textes">
+  <div class="main-title">
+    <h2>Textes</h2>
+  </div>
   <main>
     <section class="container">
       <ul class="article-list">
@@ -47,6 +50,17 @@ const posts = (await getCollection("textes")).sort(
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixins" as *;
 
+  .main-title {
+    margin: 1rem auto;
+    border-bottom: 3px solid var(--tertiary-color);
+    width: 90%;
+    max-width: 1200px;
+    h2 {
+      margin: 0;
+      padding: 0.5rem;
+    }
+  }
+
   .article-list {
     display: flex;
     flex-direction: column;
@@ -57,7 +71,7 @@ const posts = (await getCollection("textes")).sort(
   }
 
   .article-card {
-    border-radius: 1.5rem;
+    border-radius: 20px;
     box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -68,27 +82,56 @@ const posts = (await getCollection("textes")).sort(
 
     a {
       display: flex;
-      flex-direction: column; // Mobile first: vertical
       text-decoration: none;
       color: inherit;
       height: 100%;
     }
 
-    // &:hover {
-    //   transform: translateY(-4px);
-    //   box-shadow:
-    //     0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    //     0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    // Default Layout Logic (Mobile First)
 
-    //   .title {
-    //     color: var(--primary-color);
-    //   }
-    // }
+    // First Article: Prominent, Big, Vertical
+    &:first-child {
+      a {
+        flex-direction: column;
+      }
+      .card-image {
+        width: 100%;
+        height: 200px; // Smaller base height for mobile
+      }
+    }
+
+    // Other Articles: Horizontal Capsules
+    &:not(:first-child) {
+      a {
+        flex-direction: row; // Horizontal layout even on mobile
+        align-items: stretch;
+      }
+      .card-image {
+        width: 35%; // Adequate width for image
+        height: 150px; // Reduced min-height for mobile
+      }
+      .card-content {
+        width: 65%;
+        padding: 1rem;
+        justify-content: center;
+      }
+      .title {
+        font-size: 1.1rem; // Smaller title for side-by-side on mobile
+        margin-bottom: 0.25rem;
+      }
+      .date {
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+      }
+      .description {
+        -webkit-line-clamp: 3;
+        font-size: 0.9rem;
+      }
+    }
   }
 
   .card-image {
-    width: 100%;
-    height: 200px;
+    background-color: #f0f0f0; // Placeholder bg
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -116,7 +159,6 @@ const posts = (await getCollection("textes")).sort(
 
   .title {
     margin: 0 0 0.5rem 0;
-    font-size: 1.5rem;
     line-height: 1.2;
     color: rgb(var(--black));
     transition: color 0.2s ease;
@@ -133,34 +175,47 @@ const posts = (await getCollection("textes")).sort(
     color: var(--paragraph-color);
     line-height: 1.5;
     display: -webkit-box;
-    -webkit-line-clamp: 3; // Limit to 3 lines
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  // Desktop Layout
+  // Desktop Enhancements
   @include breakpoint-up($breakpoint-desktop) {
     .article-card {
-      a {
-        flex-direction: row; // Horizontal layout
-        align-items: stretch;
+      &:first-child {
+        .card-image {
+          height: 450px;
+        }
+        .card-content {
+          padding: 2.5rem;
+        }
+        .title {
+          font-size: 2.5rem;
+        }
+        .description {
+          font-size: 1.125rem;
+          -webkit-line-clamp: 4;
+        }
       }
-    }
 
-    .card-image {
-      width: 35%; // Takes up about 1/3 of the card width
-      height: auto; // Full height of the card
-      min-height: 250px; // Minimum height to look good
-    }
-
-    .card-content {
-      width: 65%;
-      padding: 2rem;
-      justify-content: center; // Center content vertically
-    }
-
-    .title {
-      font-size: 1.75rem;
+      &:not(:first-child) {
+        .card-image {
+          width: 30%;
+          min-height: 250px;
+        }
+        .card-content {
+          width: 70%;
+          padding: 2rem;
+        }
+        .title {
+          font-size: 1.75rem;
+          margin-bottom: 0.5rem;
+        }
+        .description {
+          font-size: 1rem;
+        }
+      }
     }
   }
 </style>
