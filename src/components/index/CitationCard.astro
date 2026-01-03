@@ -1,18 +1,27 @@
+---
+const citations = [
+  {
+    quote:
+      "« Les mots sont, à mon avis qui n'est pas si humble, notre plus inépuisable source de magie. Ils peuvent à la fois infliger des blessures et y porter remède. »",
+    author: "Albus Dumbledore",
+  },
+  {
+    quote:
+      "« La difficulté n'est pas d'écrire, mais d'écrire ce que l'on pense. »",
+    author: "Stendhal",
+  },
+];
+---
+
 <section class="citation-card">
-  <div class="text-section">
-    <p class="quote">
-      « Les mots sont, à mon avis qui n'est pas si humble, notre plus
-      inépuisable source de magie. Ils peuvent à la fois infliger des blessures
-      et y porter remède. »
-    </p>
-    <p class="author">Albus Dumbledore</p>
-  </div>
-  <div class="text-section">
-    <p class="quote">
-      « La difficulté n'est pas d'écrire, mais d'écrire ce que l'on pense. »
-    </p>
-    <p class="author">Stendhal</p>
-  </div>
+  {
+    citations.map((item) => (
+      <div class="text-section">
+        <p class="quote">{item.quote}</p>
+        <p class="author">{item.author}</p>
+      </div>
+    ))
+  }
 </section>
 
 <style lang="scss">
