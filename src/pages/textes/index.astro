@@ -146,10 +146,6 @@ const posts = (await getCollection("textes")).sort(
     }
   }
 
-  .article-card:hover .card-image img {
-    transform: scale(1.05);
-  }
-
   .card-content {
     padding: 1.5rem;
     display: flex;
@@ -216,6 +212,9 @@ const posts = (await getCollection("textes")).sort(
           font-size: 1rem;
         }
       }
+    }
+    .article-card:hover .card-image img {
+      transform: scale(1.05);
     }
   }
 </style>
