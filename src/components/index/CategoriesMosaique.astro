@@ -213,19 +213,6 @@ const categories = [
     transition: opacity 0.3s ease;
   }
 
-  .category-tile:hover {
-    .category-overlay::after {
-      opacity: 1;
-    }
-    h3 {
-      transform: translateY(-4px);
-    }
-    .arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
   .arrow {
     color: white;
     font-size: 1.5rem;
@@ -284,6 +271,21 @@ const categories = [
     }
     .category-tile:nth-child(5) {
       grid-area: 3 / 1 / 4 / 3;
+    }
+  }
+
+  @include breakpoint-up($breakpoint-desktop) {
+    .category-tile:hover {
+      .category-overlay::after {
+        opacity: 1;
+      }
+      h3 {
+        transform: translateY(-4px);
+      }
+      .arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   }
 </style>
