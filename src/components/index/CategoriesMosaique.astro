@@ -20,32 +20,38 @@ import Terrain from "@images/mosaïque/Terrain.jpg";
 import Musique from "@images/mosaïque/Musique.jpg";
 import Cinema from "@images/mosaïque/Cinema.jpg";
 import Livre from "@images/mosaïque/Livres.jpg";
+import { deselectScripts } from "astro/virtual-modules/transitions-swap-functions.js";
 
 const categories = [
   {
     name: "Société",
     slug: "/categories/societe",
     images: [People, Society, Union],
+    description: "Parler du monde qui nous entoure.",
   },
   {
     name: "Jeux Vidéo",
     slug: "/categories/jeux-video",
     images: [Playstation, Nintendo, Xbox],
+    description: "Plongez dans l'univers du gaming.",
   },
   {
     name: "Actualités",
     slug: "/categories/actualites",
     images: [Actualités, Journaux, Opinion],
+    description: "Parlons des faits d'actualités.",
   },
   {
     name: "Sport",
     slug: "/categories/sport",
     images: [Liverpool, Football, Terrain],
+    description: "Vivons la passion du sport.",
   },
   {
     name: "Culture",
     slug: "/categories/culture",
     images: [Musique, Cinema, Livre],
+    description: "Explorons les richesses culturelles.",
   },
 ];
 ---
@@ -72,7 +78,7 @@ const categories = [
             </div>
             <div class="category-overlay">
               <h3>{category.name}</h3>
-              <span class="arrow">→</span>
+              <span class="category-description">{category.description}</span>
             </div>
           </a>
         ))
@@ -213,10 +219,8 @@ const categories = [
     transition: opacity 0.3s ease;
   }
 
-  .arrow {
+  .category-description {
     color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
     opacity: 0;
     transform: translateX(-10px);
     transition: all 0.3s ease;
@@ -282,7 +286,7 @@ const categories = [
       h3 {
         transform: translateY(-4px);
       }
-      .arrow {
+      .category-description {
         opacity: 1;
         transform: translateX(0);
       }
