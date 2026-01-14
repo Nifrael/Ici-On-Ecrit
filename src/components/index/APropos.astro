@@ -9,24 +9,19 @@ const authors = [
     role: "Ecrivain Public",
     image: Julien,
   },
-  {
-    name: "À venir",
-    role: "Contributeur",
-    image: Julien,
-  },
 ];
 ---
 
 <section class="a-propos">
   <div class="container">
     <div class="content">
-      <h1>Ici, On Écrit</h1>
+      <!-- <h1>Ici, On Écrit</h1>
       <p class="description">
         Une plateforme dédiée à la passion de l'écriture et du partage d'idées.
         Ici, nous explorons ensemble différents univers à travers des articles
         authentiques et des réflexions personnelles sur les sujets et faits
         d'actualités qui nous animent.
-      </p>
+      </p> -->
       <h2>Ici, Qui Écrit ?</h2>
       <div class="authors-grid">
         {
@@ -64,7 +59,8 @@ const authors = [
   @use "@styles/config/mixins" as *;
 
   .a-propos {
-    min-height: 80vh;
+    min-height: 50vh;
+    margin: 5rem auto;
     display: flex;
     align-items: center;
   }
