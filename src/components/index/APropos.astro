@@ -60,7 +60,7 @@ const authors = [
 
   .a-propos {
     min-height: 50vh;
-    margin: 5rem auto;
+    margin: 6rem auto;
     display: flex;
     align-items: center;
   }
@@ -155,6 +155,10 @@ const authors = [
   }
 
   @include breakpoint-up($breakpoint-tablet) {
+    .a-propos {
+      margin: 10rem auto;
+    }
+
     .content {
       padding: 3rem 3rem;
       h2 {
