@@ -10,7 +10,7 @@ const posts = (await getCollection("textes")).sort(
 
 <Layout title="Textes">
   <div class="main-title">
-    <h2>Textes</h2>
+    <h3>Textes</h3>
   </div>
   <main>
     <section class="container">
@@ -51,7 +51,7 @@ const posts = (await getCollection("textes")).sort(
   @use "@styles/config/mixins" as *;
 
   .main-title {
-    margin: 1rem auto;
+    margin: 5rem auto 2rem auto;
     border-bottom: 3px solid var(--tertiary-color);
     width: 90%;
     max-width: 1200px;
@@ -181,7 +181,7 @@ const posts = (await getCollection("textes")).sort(
     .article-card {
       &:first-child {
         .card-image {
-          height: 450px;
+          height: 300px;
         }
         .card-content {
           padding: 2.5rem;
