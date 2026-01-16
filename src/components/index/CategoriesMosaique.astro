@@ -20,7 +20,6 @@ import Terrain from "@images/mosaïque/Terrain.jpg";
 import Musique from "@images/mosaïque/Musique.jpg";
 import Cinema from "@images/mosaïque/Cinema.jpg";
 import Livre from "@images/mosaïque/Livres.jpg";
-import { deselectScripts } from "astro/virtual-modules/transitions-swap-functions.js";
 
 const categories = [
   {
@@ -58,7 +57,7 @@ const categories = [
 
 <section class="categories-mozaique">
   <div class="container">
-    <h1>A chaque envie, une catégorie.</h1>
+    <h2>A chaque envie, une catégorie.</h2>
     <div class="mozaique-grid">
       {
         categories.map((category, index) => (
@@ -93,11 +92,11 @@ const categories = [
   @use "sass:list" as list;
 
   .categories-mozaique {
-    margin: 4rem 0;
-    h1 {
+    margin: 1rem 0;
+    h2 {
       text-align: center;
       margin-top: 0;
-      margin-bottom: 4rem;
+      margin-bottom: 2rem;
     }
   }
 
@@ -233,8 +232,7 @@ const categories = [
 
   @include breakpoint-up($breakpoint-tablet) {
     .categories-mozaique {
-      margin: 6rem 0;
-      h1 {
+      h2 {
         margin-bottom: 6rem;
       }
     }
