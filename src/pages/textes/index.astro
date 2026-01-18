@@ -51,11 +51,11 @@ const posts = (await getCollection("textes")).sort(
   @use "@styles/config/mixins" as *;
 
   .main-title {
-    margin: 5rem auto 2rem auto;
+    margin: 1rem auto;
     border-bottom: 3px solid var(--tertiary-color);
     width: 90%;
     max-width: 1200px;
-    h2 {
+    h3 {
       margin: 0;
       padding: 0.5rem;
     }
@@ -178,6 +178,9 @@ const posts = (await getCollection("textes")).sort(
 
   // Desktop Enhancements
   @include breakpoint-up($breakpoint-desktop) {
+    .main-title {
+      margin: 5rem auto 2rem auto;
+    }
     .article-card {
       &:first-child {
         .card-image {
