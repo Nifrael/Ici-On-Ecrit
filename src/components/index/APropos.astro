@@ -98,10 +98,6 @@ const authors = [
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
     object-position: top;
-
-    &:hover {
-      transform: scale(1.05);
-    }
   }
 
   h1 {
@@ -130,11 +126,6 @@ const authors = [
     transition:
       transform 0.3s ease,
       box-shadow 0.3s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    }
   }
 
   .author-image {
@@ -170,6 +161,15 @@ const authors = [
     .authors-grid {
       grid-template-columns: repeat(2, auto);
       gap: 3rem;
+    }
+  }
+
+  @include breakpoint-up($breakpoint-desktop) {
+    .author {
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 </style>
