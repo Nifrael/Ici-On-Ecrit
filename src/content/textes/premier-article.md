@@ -17,5 +17,3 @@ Elle est toujours notre, mais nous n'avons plus à faire d'effort, une fois que 
 Nous sommes tous les jours exposés à nos émotions, provoqués par des évènements extérieurs. Ceux-ci peuvent être joyeux comme particulièrement difficiles. Certains ne déclencheront pas le besoin de s'exprimer, d'autres oui.
 
 Certains évènements d'actualités peuvent également donner envie d'écrire, pour partager un avis par exemple, et c'est là un des buts de cette plateforme.
-
-## Test
